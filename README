@@ -1,0 +1,26 @@
+<div align="center">
+
+# rust_notifier
+
+</div>
+
+~~A cross platform notification library for Rust.~~     
+currently only support windows.
+
+```toml
+[dependencies]
+rust_notifier = "0.1"
+```
+
+## windows roadmap
+- [x] basic notification
+- [x] notification with custom duration
+- [x] notification with icon
+- [x] notification with sound
+- [] notification with progress bar - shows but cant update
+- [] notification with image - doesnt show
+- [] notification with buttons - shows but cant get input
+- [] notification with inputs - shows but cant get input
+
+
+

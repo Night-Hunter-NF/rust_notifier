@@ -1,17 +1,15 @@
 [package]
+edition = "2021"
 name = "rust_notifier"
 version = "0.1.0"
-edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-windows_notifier = { path = "windows_notifier" }
-tokio = { version = "1.32.0", features = ["full"] }
-
-
+windows_notifier = {path = "windows_notifier"}
 
 [workspace]
 members = [
-    "windows_notifier",
+  "windows_notifier",
+  "example",
 ]
