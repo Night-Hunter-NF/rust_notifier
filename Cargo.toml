@@ -1,5 +1,5 @@
 [package]
-name = "hass_notifier"
+name = "rust_notifier"
 version = "0.1.0"
 edition = "2021"
 
