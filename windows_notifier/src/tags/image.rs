@@ -130,7 +130,7 @@ impl ToXML for Image {
     }
 }
 
-impl Toast {
+impl<S> Toast<S> {
     pub fn add_image(&self, image: Image) -> Result<()> {
         self.doc
             .SelectSingleNode(&"/toast/visual/binding".into())?

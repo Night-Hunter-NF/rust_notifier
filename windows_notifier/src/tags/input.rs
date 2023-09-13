@@ -149,7 +149,7 @@ impl ToXML for Input {
     }
 }
 
-impl Toast {
+impl<S> Toast<S> {
     pub fn add_input(&self, input: Input) -> Result<()> {
         let input_node = input.into_raw(&self.doc)?;
         self.doc

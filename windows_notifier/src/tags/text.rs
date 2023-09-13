@@ -79,7 +79,7 @@ impl ToXML for Text {
     }
 }
 
-impl Toast {
+impl<S>  Toast<S> {
     /// Set the title of the toast notification.
     pub fn title(&mut self, title: &str) -> Result<()> {
         self.doc

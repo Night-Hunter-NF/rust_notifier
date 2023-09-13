@@ -11,7 +11,7 @@ use crate::{
 
 
 
-impl Toast {
+impl<S> Toast<S> {
     /// This can be used if you do not have a AppUserModelID.
     ///
     /// However, the toast will erroniously report its origin as powershell.

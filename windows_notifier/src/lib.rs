@@ -1,3 +1,5 @@
+use std::marker::PhantomData;
+
 use crate::error::Result;
 use utils::into_raw::ToXML;
 use windows::{
@@ -12,19 +14,22 @@ pub mod tags;
 mod utils;
 mod windows_check;
 
-pub struct Toast {
+pub struct HasAudio;
+
+pub struct Toast<S = ()> {
     doc: XmlDocument,
     app_id: HSTRING,
+    phantom: PhantomData<S>,
 }
 
-impl Toast {
+impl Toast<()> {
     /// This can be used if you do not have a AppUserModelID.
     ///
     /// However, the toast will erroniously report its origin as powershell.
     pub const POWERSHELL_APP_ID: &'static str = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\
                                                  \\WindowsPowerShell\\v1.0\\powershell.exe";
 
-    pub fn new() -> Result<Toast> {
+    pub fn new() -> Result<Toast<()>> {
         let doc = XmlDocument::new()?;
 
         doc.LoadXml(&HSTRING::from(
@@ -42,9 +47,12 @@ impl Toast {
         Ok(Toast {
             doc,
             app_id: Toast::POWERSHELL_APP_ID.into(),
+            phantom: PhantomData,
         })
     }
+}
 
+impl<S> Toast<S> {
     /// Set the AppUserModelID for the toast.
     pub fn app_id(&mut self, app_id: &str) -> Result<()> {
         self.app_id = app_id.into();

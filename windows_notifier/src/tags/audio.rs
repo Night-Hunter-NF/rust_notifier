@@ -1,3 +1,5 @@
+use std::marker::PhantomData;
+
 use windows::Data::Xml::Dom::XmlDocument;
 
 use crate::error::Result;
@@ -145,12 +147,18 @@ impl ToXML for Audio {
     }
 }
 
-impl Toast {
+pub struct HasAudio;
+
+impl Toast<()> {
     /// add custom audio to the toast notification.
-    pub fn add_audio(&self, audio: Audio) -> Result<()> {
+    pub fn add_audio(self, audio: Audio) -> Result<Toast<HasAudio>> {
         self.doc
             .SelectSingleNode(&"/toast".into())?
             .AppendChild(&audio.into_raw(&self.doc)?)?;
-        return Ok(());
+        return Ok(Toast {
+            doc: self.doc,
+            app_id: self.app_id,
+            phantom: PhantomData,
+        });
     }
 }

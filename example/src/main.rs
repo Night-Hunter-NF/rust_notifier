@@ -1,11 +1,16 @@
 use windows_notifier::{
-    tags::{image::Image, text::Text},
+    tags::{audio::Audio, image::Image, text::Text},
     Toast,
 };
 
 #[tokio::main]
 async fn main() {
-    let mut toast = Toast::new().unwrap();
+    let mut toast = Toast::new()
+        .unwrap()
+        .add_audio(Audio::new(
+            windows_notifier::tags::audio::Notification::Default,
+        ))
+        .unwrap(); /// i want this to panic \ not compile;
     toast.title("Hello, world!").unwrap();
 
     toast.add_text(Text::new("Jill Bender")).unwrap();

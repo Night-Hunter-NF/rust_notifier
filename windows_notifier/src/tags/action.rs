@@ -110,7 +110,7 @@ impl Action {
     }
 }
 
-impl Toast {
+impl<S> Toast<S> {
     /// add custom action to the toast notification.
     pub fn add_action(&self, action: Action) -> Result<()> {
         let action_node = self.doc.CreateElement(&"action".into()).unwrap();
